@@ -60,7 +60,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.duckydeveloper</shadedPattern>
+                                    <shadedPattern>com.shaded.bstats</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
