@@ -85,7 +85,7 @@
         <repository>
           <snapshots />
           <id>github</id>
-          <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+          <url>https://maven.pkg.github.com/NotChaos/DuckcraftAPI</url>
         </repository>
       </repositories>
     </profile>
