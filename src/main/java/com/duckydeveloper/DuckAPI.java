@@ -27,6 +27,17 @@ public class DuckAPI {
     public static void init(DuckAPIBuilder builder) {
         plugin = builder.getPlugin();
         permissionName = builder.getPermissionName();
+        bstatsId = builder.getBstatsId();
+
+        if (bstatsId == null) {
+            bstatsId = 0;
+        }
+
+        debug = builder.getDebug();
+
+        if (debug == null) {
+            debug = false;
+        }
 
         if (plugin == null) {
             throw new IllegalArgumentException("Plugin cannot be null");
@@ -46,10 +57,10 @@ public class DuckAPI {
         private String permissionName;
         @Getter
         @Setter
-        private boolean debug;
+        private Boolean debug;
         @Getter
         @Setter
-        private int bstatsId;
+        private Integer bstatsId;
     }
 
     private static void initLanguage() {
