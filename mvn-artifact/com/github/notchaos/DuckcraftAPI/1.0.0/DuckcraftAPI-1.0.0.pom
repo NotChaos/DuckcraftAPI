@@ -23,6 +23,7 @@
           <artifactSet>
             <includes>
               <include>org.bstats:bstats-bukkit</include>
+              <include>org.bstats:bstats-base</include>
             </includes>
           </artifactSet>
         </configuration>
