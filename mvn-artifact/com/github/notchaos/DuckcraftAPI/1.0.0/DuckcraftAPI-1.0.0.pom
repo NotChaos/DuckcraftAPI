@@ -19,6 +19,13 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <artifactSet>
+            <includes>
+              <include>org.bstats:bstats-bukkit</include>
+            </includes>
+          </artifactSet>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
