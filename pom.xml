@@ -7,7 +7,7 @@
     <name>DuckcraftAPI</name>
     <groupId>com.github.notchaos</groupId>
     <artifactId>DuckcraftAPI</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <name>DuckcraftAPI</name>
@@ -26,7 +26,7 @@
                 </repository>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+                    <url>https://maven.pkg.github.com/NotChaos/DuckcraftAPI</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>

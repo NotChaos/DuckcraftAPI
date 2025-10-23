@@ -6,7 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,14 +20,12 @@ import java.util.stream.Collectors;
 public class Message {
 
     private static final Pattern HEX_PATTERN = Pattern.compile("&#([A-Fa-f0-9]{6})");
-    private static Logger logger;
     private static Component pluginPrefix;
     private static Component insufficientPermissions;
 
-    public static void init(Component prefix, Component insufficientPermissions, Logger logger) {
+    public static void init(Component prefix, Component insufficientPermissions) {
         Message.pluginPrefix = prefix;
         Message.insufficientPermissions = insufficientPermissions;
-        Message.logger = logger;
     }
 
     public static void invalid(Player player, String message) {
@@ -228,12 +228,17 @@ public class Message {
         important(player, message, withPrefix);
     }
 
-    public static String convertMessageToString(String message) {
+    @Deprecated
+    public static String convertMessageToString(@Nullable String message) {
         String step1 = convertLegacyCodes(convertHexToLegacy(message));
         return convertLegacyCodes(step1);
     }
 
-    public static String convertHexToLegacy(String text) {
+    public static String convertStringToLegacy(@Nullable String message) {
+        return convertMessageToString(message);
+    }
+
+    private static String convertHexToLegacy(@Nullable String text) {
         if (text == null) {
             return "";
         }
@@ -256,7 +261,11 @@ public class Message {
         return MiniMessage.miniMessage().deserialize(miniMessageText);
     }
 
-    public static String convertLegacyCodes(String message) {
+    public static String convertLegacyCodes(@Nullable String message) {
+        if (message == null) {
+            return "";
+        }
+
         Map<Character, String> legacyMap = Map.ofEntries(
                 Map.entry('0', "black"),
                 Map.entry('1', "dark_blue"),
@@ -299,7 +308,11 @@ public class Message {
         return sb.toString();
     }
 
-    public static List<Component> convertStringListToComponentList(List<String> messages) {
+    public static List<Component> convertStringListToComponentList(@Nullable List<String> messages) {
+        if (messages == null) {
+            return new ArrayList<>();
+        }
+
         List<Component> components = new ArrayList<>();
         for (String message : messages) {
             components.add(convertStringToComponent(message));
@@ -307,7 +320,11 @@ public class Message {
         return components;
     }
 
-    public static List<String> convertStringListToLegacy(List<String> messages) {
+    public static List<String> convertStringListToLegacy(@Nullable List<String> messages) {
+        if (messages == null) {
+            return new ArrayList<>();
+        }
+
         List<String> convertedMessages = new ArrayList<>();
         for (String message : messages) {
             convertedMessages.add(convertMessageToString(message));
@@ -319,33 +336,13 @@ public class Message {
         return MiniMessage.miniMessage().deserialize(message);
     }
 
-    public static List<Component> deserializeMiniMessageList(List<String> messages) {
+    public static List<Component> deserializeMiniMessageList(@Nullable List<String> messages) {
+        if (messages == null) {
+            return new ArrayList<>();
+        }
+
         return messages.stream()
                 .map(Message::deserializeMiniMessage)
                 .collect(Collectors.toList());
-    }
-
-    public static String formatDuration(long totalSeconds) {
-        long seconds = totalSeconds % 60;
-        long minutes = (totalSeconds / 60) % 60;
-        long hours = (totalSeconds / 3600) % 24;
-        long days = (totalSeconds / 86400) % 7;
-        long weeks = (totalSeconds / 604800) % 4;
-        long months = totalSeconds / 2419200;
-
-        String[] names = {"month", "week", "day", "hour", "minute", "second"};
-        long[] values = {months, weeks, days, hours, minutes, seconds};
-
-        StringBuilder sb = new StringBuilder();
-        int count = 0;
-        for (int i = 0; i < values.length && count < 2; i++) {
-            if (values[i] > 0) {
-                sb.append(values[i]).append(" ").append(names[i]);
-                if (values[i] > 1) sb.append("s");
-                sb.append(" ");
-                count++;
-            }
-        }
-        return sb.toString().trim();
     }
 }

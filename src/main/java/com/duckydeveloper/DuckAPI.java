@@ -72,7 +72,7 @@ public class DuckAPI {
             if (defaultInput != null) {
                 defaultMessages.load(defaultInput);
             } else {
-                plugin.getLogger().warning("messages.properties (Standard) nicht im JAR gefunden!");
+                plugin.getLogger().warning("messages.properties has not been found in the jar!");
             }
         } catch (IOException e) {
             plugin.getLogger().severe("Error loading standard messages.properties: " + e.getMessage());
@@ -135,7 +135,7 @@ public class DuckAPI {
             permissionName = "duckapi";
         }
 
-        Message.init(getLanguageComponent("Prefix"), getLanguageComponent("InsufficientPermissions"), plugin.getLogger());
+        Message.init(getLanguageComponent("Prefix"), getLanguageComponent("InsufficientPermissions"));
         Permission.init(plugin, permissionName);
     }
 
@@ -150,5 +150,14 @@ public class DuckAPI {
 
     public static Component getLanguageComponent(String key) {
         return messageComponentMap.get(key);
+    }
+
+    public static String getLanguageString(String key) {
+        return languageConfig.getProperty(key);
+    }
+
+    public static void reloadConfiguration() {
+        initLanguage();
+        initUtils();
     }
 }
