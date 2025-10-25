@@ -1,4 +1,5 @@
 com\duckydeveloper\util\Embed$EmbedObject$Field.class
+com\duckydeveloper\util\GUI.class
 com\duckydeveloper\util\GUIItem.class
 com\duckydeveloper\util\Embed$EmbedObject$Footer.class
 com\duckydeveloper\DuckAPI.class
@@ -11,4 +12,5 @@ com\duckydeveloper\util\Embed$EmbedObject.class
 com\duckydeveloper\util\Embed$JSONObject.class
 com\duckydeveloper\util\Permission.class
 com\duckydeveloper\DuckAPI$DuckAPIBuilder.class
+com\duckydeveloper\events\onInventoryClickEvent.class
 com\duckydeveloper\util\Message.class
