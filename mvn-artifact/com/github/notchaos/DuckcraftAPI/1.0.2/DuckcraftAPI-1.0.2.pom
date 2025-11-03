@@ -196,6 +196,12 @@
       <version>1.18.30</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.TheSilentPro.HeadDB</groupId>
+      <artifactId>headdb-api</artifactId>
+      <version>a15cbe7a97</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>
