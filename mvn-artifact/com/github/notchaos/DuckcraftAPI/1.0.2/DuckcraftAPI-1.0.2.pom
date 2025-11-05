@@ -197,9 +197,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.TheSilentPro.HeadDB</groupId>
-      <artifactId>headdb-api</artifactId>
-      <version>a15cbe7a97</version>
+      <groupId>com.arcaniax</groupId>
+      <artifactId>HeadDatabase-API</artifactId>
+      <version>1.3.2</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
