@@ -1,33 +1,68 @@
 package com.duckydeveloper;
 
+import com.duckydeveloper.events.onDatabaseLoadEvent;
+import com.duckydeveloper.events.onInventoryClickEvent;
 import com.duckydeveloper.util.Message;
 import com.duckydeveloper.util.Permission;
 import lombok.Getter;
 import lombok.Setter;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import net.kyori.adventure.text.Component;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.*;
 
 public class DuckAPI {
     @Getter
     private static final Properties languageConfig = new Properties();
     private static final Map<String, Component> messageComponentMap = new HashMap<>();
+    @Getter
     private static JavaPlugin plugin;
     private static String permissionName;
+    @Getter
     private static Boolean debug;
     private static Integer bstatsId;
     @Getter
     private static Metrics bstatsMetrics;
+    @Getter
+    private static String persistentDataKey;
+    private static Boolean blockGuiItemInteractions;
+    @Getter
+    private static Boolean enableHeadAPIIntegration = false;
+    private static CompletableFuture<HeadDatabaseAPI> headApiFuture = new CompletableFuture<>();
+
+    public static void setHeadApi(HeadDatabaseAPI api) {
+        if (headApiFuture == null) headApiFuture = new CompletableFuture<>();
+        headApiFuture.complete(api);
+    }
+
+    public static HeadDatabaseAPI getHeadApi() {
+        try {
+            return headApiFuture.get();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return null;
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (CancellationException ignore) {
+            return null;
+        }
+    }
 
     public static void init(DuckAPIBuilder builder) {
         plugin = builder.getPlugin();
         permissionName = builder.getPermissionName();
         bstatsId = builder.getBstatsId();
+        persistentDataKey = builder.getPersistentDataKey();
+        blockGuiItemInteractions = builder.getBlockGuiItemInteractions();
+        enableHeadAPIIntegration = builder.getEnableHeadAPIIntegration();
 
         if (bstatsId == null) {
             bstatsId = 0;
@@ -46,6 +81,12 @@ public class DuckAPI {
         initLanguage();
         initUtils();
         initBstats();
+        initEvents();
+
+        if (persistentDataKey == null || persistentDataKey.isEmpty()) {
+            persistentDataKey = "duckapi_data";
+            plugin.getLogger().warning("Persistent Data Key is not set. Defaulting to 'duckapi_data'.");
+        }
     }
 
     public static class DuckAPIBuilder {
@@ -61,6 +102,17 @@ public class DuckAPI {
         @Getter
         @Setter
         private Integer bstatsId;
+        @Getter
+        @Setter
+        private String persistentDataKey;
+        @Getter
+        @Setter
+        @NotNull
+        private Boolean blockGuiItemInteractions = true;
+        @Getter
+        @Setter
+        @NotNull
+        private Boolean enableHeadAPIIntegration = false;
     }
 
     private static void initLanguage() {
@@ -159,5 +211,17 @@ public class DuckAPI {
     public static void reloadConfiguration() {
         initLanguage();
         initUtils();
+    }
+
+    private static void initEvents() {
+        PluginManager pm = plugin.getServer().getPluginManager();
+        pm.registerEvents(new onInventoryClickEvent(plugin, debug, blockGuiItemInteractions), plugin);
+
+        if (pm.isPluginEnabled("HeadDatabase") && enableHeadAPIIntegration) {
+            pm.registerEvents(new onDatabaseLoadEvent(plugin, debug), plugin);
+            plugin.getLogger().info("HeadDatabase integration enabled.");
+        } else {
+            enableHeadAPIIntegration = false;
+        }
     }
 }

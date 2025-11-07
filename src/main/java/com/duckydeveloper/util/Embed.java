@@ -1,4 +1,5 @@
 package com.duckydeveloper.util;
+
 import java.awt.*;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
