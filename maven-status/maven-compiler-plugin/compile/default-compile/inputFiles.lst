@@ -1,6 +1,7 @@
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/DuckAPI.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/events/onDatabaseLoadEvent.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/events/onInventoryClickEvent.java
+/home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/events/onPageChangeEvent.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/util/Embed.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/util/GUI.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/util/GUIItem.java
