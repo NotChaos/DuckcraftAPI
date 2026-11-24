@@ -1,4 +1,5 @@
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/DuckAPI.java
+/home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/Metrics.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/events/onDatabaseLoadEvent.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/events/onInventoryClickEvent.java
 /home/chaos/IdeaProjects/DuckcraftAPI/src/main/java/com/duckydeveloper/events/onPageChangeEvent.java
