@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DuckcraftAPI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DuckcraftAPI_jar</output-path>
+    <root id="archive" name="DuckcraftAPI.jar">
+      <element id="module-output" name="DuckcraftAPI" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/bstats/bstats-base/3.0.2/bstats-base-3.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/bstats/bstats-bukkit/3.0.2/bstats-bukkit-3.0.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

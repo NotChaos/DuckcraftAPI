@@ -32,13 +32,25 @@ public class onInventoryClickEvent implements Listener {
 
     @EventHandler
     public void InventoryClickEventEvent(InventoryClickEvent e) {
-        if (blockGuiItemInteractions) {
-            try {
-                Boolean isGuiItem = e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, DuckAPI.getPersistentDataKey() + "isGuiItem"), PersistentDataType.BOOLEAN);
-                if (isGuiItem != null && isGuiItem) {
-                    e.setCancelled(true);
+        if (!blockGuiItemInteractions) return;
+        try {
+            if (e.getCurrentItem() == null || e.getCurrentItem().getItemMeta() == null) {
+                if (DuckAPI.isDebug()) {
+                    logger.info("InventoryClick: no current item or item meta.");
                 }
-            } catch (Exception ignored) {
+                return;
+            }
+
+            Boolean isGuiItem = e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(new NamespacedKey(plugin, DuckAPI.getPersistentDataKey() + "isGuiItem"), PersistentDataType.BOOLEAN);
+            if (isGuiItem != null && isGuiItem) {
+                e.setCancelled(true);
+                if (DuckAPI.isDebug()) {
+                    logger.info("Cancelled GUI item interaction.");
+                }
+            }
+        } catch (Exception ex) {
+            if (DuckAPI.isDebug()) {
+                logger.warning("Error processing inventory click: " + ex.getMessage());
             }
         }
     }

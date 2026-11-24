@@ -11,11 +11,11 @@ import java.util.List;
 public class Embed {
 
     private final String url;
+    private final List<EmbedObject> embeds = new ArrayList<>();
     private String content;
     private String username;
     private String avatarUrl;
     private boolean tts;
-    private final List<EmbedObject> embeds = new ArrayList<>();
 
     public Embed(String url) {
         this.url = url;
@@ -145,16 +145,15 @@ public class Embed {
 
 
     public static class EmbedObject {
+        private final List<Field> fields = new ArrayList<>();
         private String title;
         private String description;
         private String url;
         private Color color;
-
         private Footer footer;
         private Thumbnail thumbnail;
         private Image image;
         private Author author;
-        private final List<Field> fields = new ArrayList<>();
 
         public String getTitle() {
             return title;

@@ -2,7 +2,10 @@ package com.duckydeveloper.util;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.format.Style;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -32,6 +35,10 @@ public class Message {
     }
 
     public static void invalid(Player player, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(Component.text(ChatColor.RED + message)));
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
@@ -42,6 +49,10 @@ public class Message {
     }
 
     public static void invalid(Player player, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(message));
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_DIDGERIDOO, 1, 1);
@@ -52,6 +63,10 @@ public class Message {
     }
 
     public static void invalid(CommandSender sender, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         if (sender instanceof Player player) {
             invalid(player, message, withPrefix);
             return;
@@ -66,6 +81,10 @@ public class Message {
     }
 
     public static void invalid(CommandSender sender, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         if (sender instanceof Player player) {
             invalid(player, message, withPrefix);
             return;
@@ -80,6 +99,10 @@ public class Message {
     }
 
     public static void successful(Player player, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(Component.text(ChatColor.GREEN + message)));
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
@@ -90,6 +113,10 @@ public class Message {
     }
 
     public static void successful(Player player, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(message));
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
@@ -100,6 +127,10 @@ public class Message {
     }
 
     public static void successful(CommandSender sender, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         if (!(sender instanceof Player player)) {
             Component prefix = withPrefix ? pluginPrefix : Component.empty();
             sender.sendMessage(prefix.append(Component.text(ChatColor.GREEN + message)));
@@ -114,6 +145,10 @@ public class Message {
     }
 
     public static void successful(CommandSender sender, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         if (!(sender instanceof Player player)) {
             Component prefix = withPrefix ? pluginPrefix : Component.empty();
             sender.sendMessage(prefix.append(message));
@@ -128,6 +163,10 @@ public class Message {
     }
 
     public static void restricted(Player player, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(Component.text(ChatColor.RED + message)));
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
@@ -138,6 +177,10 @@ public class Message {
     }
 
     public static void restricted(Player player, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(message));
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
@@ -148,6 +191,10 @@ public class Message {
     }
 
     public static void restricted(CommandSender sender, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         if (!(sender instanceof Player player)) {
             Component prefix = withPrefix ? pluginPrefix : Component.empty();
             sender.sendMessage(prefix.append(insufficientPermissions));
@@ -162,6 +209,10 @@ public class Message {
     }
 
     public static void restricted(CommandSender sender, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         if (!(sender instanceof Player player)) {
             Component prefix = withPrefix ? pluginPrefix : Component.empty();
             sender.sendMessage(prefix.append(message));
@@ -184,6 +235,10 @@ public class Message {
     }
 
     public static void important(Player player, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(Component.text(ChatColor.RED + message)));
         player.playSound(player.getLocation(), Sound.BLOCK_NETHERITE_BLOCK_STEP, 1, 1);
@@ -194,6 +249,10 @@ public class Message {
     }
 
     public static void important(Player player, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         Component prefix = withPrefix ? pluginPrefix : Component.empty();
         player.sendMessage(prefix.append(message));
         player.playSound(player.getLocation(), Sound.BLOCK_NETHERITE_BLOCK_STEP, 1, 1);
@@ -204,6 +263,10 @@ public class Message {
     }
 
     public static void important(CommandSender sender, String message, boolean withPrefix) {
+        if (message == null || message.isEmpty()) {
+            return;
+        }
+
         if (!(sender instanceof Player player)) {
             Component prefix = withPrefix ? pluginPrefix : Component.empty();
             sender.sendMessage(prefix.append(Component.text(ChatColor.RED + message)));
@@ -218,6 +281,10 @@ public class Message {
     }
 
     public static void important(CommandSender sender, Component message, boolean withPrefix) {
+        if (message == null || MiniMessage.miniMessage().serialize(message).isEmpty()) {
+            return;
+        }
+
         if (!(sender instanceof Player player)) {
             Component prefix = withPrefix ? pluginPrefix : Component.empty();
             sender.sendMessage(prefix.append(message));
@@ -368,20 +435,44 @@ public class Message {
     private static Component replaceTextRecursive(Component component, String target, String replacement) {
         if (replacement == null) replacement = "";
 
+        Style style = replaceTextInStyle(component.style(), target, replacement);
+        List<Component> replacedChildren = new ArrayList<>(component.children().size());
+        for (Component child : component.children()) {
+            replacedChildren.add(replaceTextRecursive(child, target, replacement));
+        }
+
         if (component instanceof TextComponent textComponent) {
             String newContent = textComponent.content().replace(target, replacement);
-            Component newComponent = Component.text(newContent, textComponent.style());
-            for (Component child : textComponent.children()) {
-                newComponent = newComponent.append(replaceTextRecursive(child, target, replacement));
-            }
-            return newComponent;
-        } else {
-            Component newComponent = component;
-            for (Component child : component.children()) {
-                newComponent = newComponent.append(replaceTextRecursive(child, target, replacement));
-            }
-            return newComponent;
+            return Component.text(newContent, style).children(replacedChildren);
         }
+
+        return component.children(replacedChildren).style(style);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Style replaceTextInStyle(Style style, String target, String replacement) {
+        if (style == null) return Style.empty();
+
+        Style.Builder builder = style.toBuilder();
+
+        ClickEvent clickEvent = style.clickEvent();
+        if (clickEvent != null) {
+            builder.clickEvent(ClickEvent.clickEvent(
+                    clickEvent.action(),
+                    clickEvent.value().replace(target, replacement)
+            ));
+        }
+
+        HoverEvent<?> hoverEvent = style.hoverEvent();
+        if (hoverEvent != null
+                && hoverEvent.action() == HoverEvent.Action.SHOW_TEXT
+                && hoverEvent.value() instanceof Component hoverComponent) {
+            builder.hoverEvent(HoverEvent.showText(
+                    replaceTextRecursive(hoverComponent, target, replacement)
+            ));
+        }
+
+        return builder.build();
     }
 
     public static Component replaceInComponent(Component component, String target, String replacement) {
